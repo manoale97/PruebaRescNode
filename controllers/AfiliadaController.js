@@ -2,7 +2,6 @@
 //querys sequelize
 import db from "../database/db.js";
 import { QueryTypes } from "sequelize";
-import AfiliadaModel from "../models/AfiliadaModel.js";
 
 //Controlador de Afiliadas
 export const controllerAfiliada = async (req, res) => {
@@ -21,12 +20,6 @@ export const controllerAfiliada = async (req, res) => {
              } catch (error) {
                  res.json( {message: error.message} )
              }
-            /*try {
-                const users = await AfiliadaModel.findAll()
-                res.json(users)
-            } catch (error) {
-                res.json( {message: error.message} )
-            }*/
         break;
 
         //Mostrar un campo
@@ -37,7 +30,46 @@ export const controllerAfiliada = async (req, res) => {
         
         //Crear un nuevo campo
         case 2:
-          //
+            try {
+            await db.query('INSERT INTO `Afiliadas` (`nombre`, `nombre_comercial`, `RUC`, `idPais`, `idProvincia`, `idCiudad`, `direccion`, `telefono1`, `telefono2`, `celular1`, `email1`, `email2`, `representante`, `ciRepresentante`, `fechaCreacion`, `contribuyenteEspecial`, `codigoContribuyente`, `microempresa`, `notamicroempresa`, `rimpe`, `notaRimpe`, `agenteRetencion`, `nResolucion`, `obligadaCont`, `tipoFirma`, `Imagen`, `estado`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
+               {
+                replacements: [
+                    req.body.nombre, 
+                    req.body.nombre_comercial, 
+                    req.body.ruc,
+                    req.body.idPais, 
+                    req.body.idProvincia, 
+                    req.body.idPais, 
+                    req.body.idCiudad,
+                    req.body.direccion, 
+                    req.body.telefono1, 
+                    req.body.telefono2, 
+                    req.body.celular1, 
+                    req.body.email1, 
+                    req.body.email2, 
+                    req.body.representante,
+                    req.body.ciRepresentante, 
+                    req.body.fechaCreacion, 
+                    req.body.contribuyenteEspecial, 
+                    req.body.codigoContribuyente, 
+                    req.body.microempresa, 
+                    req.body.notamicroempresa, 
+                    req.body.rimpe, 
+                    req.body.notaRimpe, 
+                    req.body.agenteRetencion, 
+                    req.body.nResolucion, 
+                    req.body.obligadaCont, 
+                    req.body.tipoFirma, 
+                    req.body.Imagen, 
+                    req.body.estado
+                    ],
+                 type: QueryTypes.INSERT
+               }
+              )
+              res.json( {"message":"Afiliada creada exitosamente" })
+             } catch (error) {
+                 res.json( {message: error.message} )
+             }
 
         break;
 
