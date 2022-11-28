@@ -28,7 +28,7 @@ export const login = async (req, res) => {
        )
 
         if(loginuser.length>0){
-        var loginUserJSON =JSON.stringify([loginuser[0],Empresas]);
+        var loginUserJSON =JSON.stringify([loginuser[0],Empresas.length]);
         console.log(loginUserJSON)
 
         const token = jwt.sign(loginUserJSON, 'seguridadRESC');

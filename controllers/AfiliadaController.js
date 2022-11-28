@@ -11,7 +11,7 @@ export const controllerAfiliada = async (req, res) => {
         // Mostrar todos los campos
         case 0:
             try {
-                const Afiliadas = await db.query('SELECT `idAfiliada`,`nombre`, `RUC`, `direccion`, `telefono1`, `celular1`, `estado` FROM Afiliadas',
+                const Afiliadas = await db.query('SELECT `idAfiliada`,`nombre`, `RUC`, `direccion`, `telefono1`, `celular1`, `estado` FROM Afiliadas WHERE `estado`<2' ,
                {
                  type: QueryTypes.SELECT
                }
@@ -129,8 +129,21 @@ export const controllerAfiliada = async (req, res) => {
 
         //Borrar un campo
         case 4:
-          //
-
+            try {
+                await db.query('UPDATE `Afiliadas` SET `estado`=? WHERE `Afiliadas`.`idAfiliada` = ?;',
+                   {
+                    replacements: [
+                        req.body.estado,
+                        req.body.idAfiliada
+                    ],
+                     type: QueryTypes.UPDATE
+                   }
+                  )
+                  res.json( {"message":"Afiliada borrada exitosamente"})
+                
+            } catch (error) {
+                res.json( {message: error.message} )
+            }
         break;
 
         //Obtener el id una afiliada
@@ -306,39 +319,3 @@ export const controllerAfiliada = async (req, res) => {
     }
 
 }
-
-
-//Mostrar todos los registros
-export const getAfiliadas = async (req, res) => {
-    try {
-        const users = await userModel.findAll()
-        res.json(users)
-    } catch (error) {
-        res.json( {message: error.message} )
-    }
-}
-
-//Crear un registro
-export const createBlog = async (req, res) => {
-    try {
-       await userModel.create(req.body)
-       res.json({
-           "message":"¡Registro creado correctamente!"
-       })
-    } catch (error) {
-        res.json( {message: error.message} )
-    }
-}
-/* //Crear un registro con sql
-export const crearAfiliada = async(req, res) => {
-    try {
-        const loginuser = await db.query('SELECT `nombre`, `correo` FROM Usuarios WHERE correo = ? AND contrasenia = ? ',
-       {
-         replacements: [req.body.correo, req.body.contrasenia],
-         type: QueryTypes.SELECT
-       }
-      )
-     } catch (error) {
-         res.json( {message: error.message} )
-     }
-}*/
