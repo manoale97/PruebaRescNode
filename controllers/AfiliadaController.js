@@ -316,6 +316,22 @@ export const controllerAfiliada = async (req, res) => {
                 res.json( {message: error.message} )
             }
         break;
+
+        //Mostrar un solo campo buscando por RUC
+        case 14:
+            try {
+                const Afiliada = await db.query('SELECT * FROM Afiliadas WHERE RUC = ?',
+               {
+                 replacements: [req.body.idAfiliada,],
+                 type: QueryTypes.SELECT
+               }
+              )
+              
+              res.json(Afiliada)
+             } catch (error) {
+                 res.json( {message: error.message} )
+             }
+        break;
     }
 
 }

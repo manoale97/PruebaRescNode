@@ -1,9 +1,10 @@
 import express from 'express'
-import { login, nEmpresas} from '../controllers/UserController.js'
+import { login, nEmpresas} from '../controllers/LoginController.js'
 import { validacionToken } from '../controllers/AuthController.js'
 import { controllerAfiliada } from '../controllers/AfiliadaController.js'
 import { controllerDireccion } from '../controllers/DireccionController.js'
 import { controllerRequisitos } from '../controllers/RequisitosController.js'
+import { controllerUsuario } from '../controllers/UsuarioController.js'
 const router = express.Router()
 
 //router.get('/', getAllUsers)
@@ -18,5 +19,6 @@ router.post('/afiliada', controllerAfiliada)
 router.post('/nEmpresas', nEmpresas)
 router.post('/paises-ciudades', controllerDireccion)
 router.post('/requisitos', controllerRequisitos)
+router.post('/usuario', controllerUsuario)
 
 export default router
