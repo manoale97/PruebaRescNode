@@ -5,6 +5,7 @@ import { controllerAfiliada } from '../controllers/AfiliadaController.js'
 import { controllerDireccion } from '../controllers/DireccionController.js'
 import { controllerRequisitos } from '../controllers/RequisitosController.js'
 import { controllerUsuario } from '../controllers/UsuarioController.js'
+import { controllerEmisor } from '../controllers/EmisorController.js'
 const router = express.Router()
 
 //router.get('/', getAllUsers)
@@ -20,5 +21,6 @@ router.post('/nEmpresas', nEmpresas)
 router.post('/paises-ciudades', controllerDireccion)
 router.post('/requisitos', controllerRequisitos)
 router.post('/usuario', controllerUsuario)
+router.post('/emisor', controllerEmisor)
 
 export default router
